@@ -1,0 +1,2 @@
+#spark-submit --num-executors 1 --executor-cores 1 --class Main target/scala-2.11/Spark_17890-assembly-1.0.jar
+#spark-submit --num-executors 1 --executor-cores 1 --class Main1 target/scala-2.11/Spark_17890-assembly-1.0.jar
