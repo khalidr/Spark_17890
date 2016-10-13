@@ -1,6 +1,7 @@
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 
+
 object Main extends App{
 
   val conf = new SparkConf()
@@ -17,7 +18,7 @@ object Main extends App{
   df.flatMap(_ => Seq.empty[Foo])
 
   println("mapping...")
-  df.map(_ => Seq.empty[Foo]) //fails
+  df.map(_ => Seq.empty[Foo]) //spark-submit fails here
 
 }
 object Main1 extends App{
@@ -28,15 +29,13 @@ object Main1 extends App{
     .config(conf)
     .getOrCreate()
 
-  import session.implicits._
-
   val rdd = session.sparkContext.parallelize(List(1,2,3))
 
   println("flatmapping ...")
   rdd.flatMap(_ => Seq.empty[Foo])
 
   println("mapping...")
-  rdd.map(_ => Seq.empty[Foo]) //fails
+  rdd.map(_ => Seq.empty[Foo]) //works fine when using an RDD
 
 }
 case class Foo(value:String)
